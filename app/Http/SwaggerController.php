@@ -1,0 +1,150 @@
+<?php
+
+namespace App\Http;
+
+/**
+ * @OA\OpenApi(
+ *     @OA\Info(
+ *         version="1.0.0",
+ *         title="Minha API",
+ *         description="Documentação da API",
+ *         @OA\Contact(
+ *             email="seu-email@dominio.com"
+ *         ),
+ *         @OA\License(
+ *             name="Apache 2.0",
+ *             url="http://www.apache.org/licenses/LICENSE-2.0.html"
+ *         )
+ *     ),
+ *     @OA\Server(
+ *         url=L5_SWAGGER_CONST_HOST,
+ *         description="Servidor principal"
+ *     )
+ * )
+ * 
+ * 
+ * @OA\Schema(
+ *     schema="TypeInstallation",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         example="Exemplo"
+ *     )
+ * )
+ * @OA\Schema(
+ *     schema="Uf",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="uf",
+ *         type="string",
+ *         example="Sp"
+ *     )
+ * )
+ * @OA\Schema(
+ *     schema="ProjectEquipament",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="quantity",
+ *         type="integer",
+ *         example=1
+ *     )
+ * )
+ * @OA\Schema(
+ *     schema="Project",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="uf",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="client",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="type_installation",
+ *         type="integer",
+ *         example=1
+ *     )
+ * )
+ * @OA\Schema(
+ *     schema="Equipament",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         example="Mola"
+ *     )
+ * )
+ * @OA\Schema(
+ *     schema="Client",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         example="Andre"
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         example="andre@gmail.com"
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="string",
+ *         example="21312321"
+ *     ),
+ *     @OA\Property(
+ *         property="document",
+ *         type="string",
+ *         example="4490837"
+ *     ),
+ *     @OA\Property(
+ *         property="type_document",
+ *         type="string",
+ *         example="cpf"
+ *     )
+ * )
+ * */
+class SwaggerController
+{
+    // Este arquivo é apenas para documentação.
+}

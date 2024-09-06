@@ -18,6 +18,20 @@ class ProjectController extends Controller
 {
     //
 
+    /**
+     * @OA\Get(
+     *     path="/api/project",
+     *     summary="Retornar uma lista de projetos paginada",
+     *     description="Retornar uma lista de projetos paginada",
+     *     operationId="projectList",
+     *     tags={"public"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de exemplos retornada com sucesso",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Project"))
+     *     )
+     * )
+     */
     /*Essa foi um tipo de construção Where que fiz há um tempo, o ideal e fazer os joins, e de acordo com o que passado nos parametros, a função construi a consulta sozinha, como não é especificado os filtros, deixei somente acesso a tabela base do Project, caso quisesse filtrar por equipamento também funcionaria, porém teria que fazer o join.*/
     public function list(Request $request)
     {
@@ -27,6 +41,29 @@ class ProjectController extends Controller
         return Answer::json($projetos, 'Project listed successfully');
     }
 
+
+
+    /**
+     * @OA\Get(
+     *     path="/api/project/{id}",
+     *     summary="Retornar o projeto e seus respecitvos itens de forma detalhada",
+     *     description="Retornar o projeto e seus respecitvos itens de forma detalhada",
+     *     operationId="projectDetail",
+     *     tags={"public"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID do Projeto",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de exemplos retornada com sucesso",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Project"))
+     *     )
+     * )
+     */
     public function detail($id)
     {
         $prj = Project::findOrFail($id);
@@ -37,6 +74,34 @@ class ProjectController extends Controller
         return Answer::json($prj, 'Project listed successfully');
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/project",
+     *     summary="Inseri um objeto",
+     *     description="Cria um novo recurso no banco de dados",
+     *     operationId="ProjectStore",
+     *     tags={"public"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"client_id","type_installation_id","uf_id","equipament"},
+     *             @OA\Property(property="client_id", type="id", example="1"),
+     *             @OA\Property(property="type_installation_id", type="string", example="2"),
+     *             @OA\Property(property="uf_id", type="string", example="1"),
+     *             @OA\Property(property="equipament", type="array", @OA\Items(ref="#/components/schemas/ProjectEquipament")),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Exemplo criado com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Project")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Erro de validação"
+     *     )
+     * )
+     */
     public function save(ProjectPostRequest $request)
     {   
         $o_prj = $request->all();
@@ -57,6 +122,30 @@ class ProjectController extends Controller
         return Answer::json($project, 'Project saved successfully');
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/project/{id}",
+     *     summary="Deletar um recurso",
+     *     description="Deleta um recurso baseado no ID fornecido",
+     *     operationId="projectDelete",
+     *     tags={"public"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID do recurso que será deletado",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Recurso deletado com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Recurso não encontrado"
+     *     ),
+     * )
+     */
     public function destroy($id)
     {
         Project::findOrFail($id);

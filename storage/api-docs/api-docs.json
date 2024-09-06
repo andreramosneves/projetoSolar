@@ -1,0 +1,1088 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Minha API",
+        "description": "Documentação da API",
+        "contact": {
+            "email": "seu-email@dominio.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Servidor principal"
+        }
+    ],
+    "paths": {
+        "/api/client": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Obter lista de Clients",
+                "description": "Retorna uma lista",
+                "operationId": "ClientList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Client"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Inseri um objeto",
+                "description": "Cria um novo recurso no banco de dados",
+                "operationId": "ClientStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "document",
+                                    "type_document"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "andre"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "an@gm.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "231321321"
+                                    },
+                                    "document": {
+                                        "type": "string",
+                                        "example": "231321321"
+                                    },
+                                    "type_document": {
+                                        "type": "string",
+                                        "example": "cpf"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exemplo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Client"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/client/{id}": {
+            "put": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar um objeto",
+                "description": "Atualiza um recurso existente com base no ID",
+                "operationId": "ClientUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "document",
+                                    "type_document"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "andre"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "an@gm.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "231321321"
+                                    },
+                                    "document": {
+                                        "type": "string",
+                                        "example": "231321321"
+                                    },
+                                    "type_document": {
+                                        "type": "string",
+                                        "example": "cpf"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Client"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "ClientDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso que será deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/equipament": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Retornar uma lista de equipamentos",
+                "description": "Retornar uma lista de equipamentos",
+                "operationId": "equipamentList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Equipament"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Inseri um objeto",
+                "description": "Cria um novo recurso no banco de dados",
+                "operationId": "EquipamentStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "uf": {
+                                        "type": "string",
+                                        "example": "Mola"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exemplo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Equipament"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/equipamento/{id}": {
+            "put": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar um objeto",
+                "description": "Atualiza um recurso existente com base no ID",
+                "operationId": "EquipamentUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Equipamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "uf"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Novo Nome do Exemplo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Equipament"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/equipament/{id}": {
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "EquipamentDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso que será deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/project": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Retornar uma lista de projetos paginada",
+                "description": "Retornar uma lista de projetos paginada",
+                "operationId": "projectList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Project"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Inseri um objeto",
+                "description": "Cria um novo recurso no banco de dados",
+                "operationId": "ProjectStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "client_id",
+                                    "type_installation_id",
+                                    "uf_id",
+                                    "equipament"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "id",
+                                        "example": "1"
+                                    },
+                                    "type_installation_id": {
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "uf_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "equipament": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/ProjectEquipament"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exemplo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/project/{id}": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Retornar o projeto e seus respecitvos itens de forma detalhada",
+                "description": "Retornar o projeto e seus respecitvos itens de forma detalhada",
+                "operationId": "projectDetail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Project"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "projectDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso que será deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/project_equipament/{idProject}/{idEquip}": {
+            "put": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar um objeto",
+                "description": "Atualiza um Equipamento a um projeto",
+                "operationId": "ProjectEquipamentUpdate",
+                "parameters": [
+                    {
+                        "name": "idProject",
+                        "in": "path",
+                        "description": "ID do Projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idEquip",
+                        "in": "path",
+                        "description": "ID do Equipamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProjectEquipament"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar um objeto",
+                "description": "Adiciona um Equipamento a um projeto",
+                "operationId": "ProjectEquipamentAdd",
+                "parameters": [
+                    {
+                        "name": "idProject",
+                        "in": "path",
+                        "description": "ID do Projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idEquip",
+                        "in": "path",
+                        "description": "ID do Equipamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProjectEquipament"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "ProjectEquipamentDelete",
+                "parameters": [
+                    {
+                        "name": "idProject",
+                        "in": "path",
+                        "description": "ID do Projeto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idEquip",
+                        "in": "path",
+                        "description": "ID do Equipamento",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/type_installation": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Obter lista de Tipos",
+                "description": "Retorna uma lista de tipos de instalação",
+                "operationId": "typeInstallationList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TypeInstallation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Inseri um tipo de intalação",
+                "description": "Cria um novo recurso no banco de dados",
+                "operationId": "typeInstallationStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Exemplo 1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exemplo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TypeInstallation"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/type_installation/{id}": {
+            "put": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar o Tipo de Instalação",
+                "description": "Atualiza um recurso existente com base no ID",
+                "operationId": "typeInstallationUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Tipo de Instalação",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Novo Nome do Exemplo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TypeInstallation"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "typeInstallationDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso que será deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/uf": {
+            "get": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Obter lista de Ufs",
+                "description": "Retorna uma lista",
+                "operationId": "UfList",
+                "responses": {
+                    "200": {
+                        "description": "Lista de exemplos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Uf"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Inseri um objeto",
+                "description": "Cria um novo recurso no banco de dados",
+                "operationId": "UfStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "uf"
+                                ],
+                                "properties": {
+                                    "uf": {
+                                        "type": "string",
+                                        "example": "SP"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Exemplo criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Uf"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/api/uf/{id}": {
+            "put": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Atualizar um objeto",
+                "description": "Atualiza um recurso existente com base no ID",
+                "operationId": "UfUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do UF",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "uf"
+                                ],
+                                "properties": {
+                                    "uf": {
+                                        "type": "string",
+                                        "example": "Novo Nome do Exemplo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Exemplo atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Uf"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Exemplo não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "public"
+                ],
+                "summary": "Deletar um recurso",
+                "description": "Deleta um recurso baseado no ID fornecido",
+                "operationId": "UfDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do recurso que será deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recurso deletado com sucesso"
+                    },
+                    "404": {
+                        "description": "Recurso não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TypeInstallation": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Exemplo"
+                    }
+                },
+                "type": "object"
+            },
+            "Uf": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "uf": {
+                        "type": "string",
+                        "example": "Sp"
+                    }
+                },
+                "type": "object"
+            },
+            "ProjectEquipament": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Project": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "uf": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "client": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type_installation": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Equipament": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Mola"
+                    }
+                },
+                "type": "object"
+            },
+            "Client": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Andre"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "andre@gmail.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "21312321"
+                    },
+                    "document": {
+                        "type": "string",
+                        "example": "4490837"
+                    },
+                    "type_document": {
+                        "type": "string",
+                        "example": "cpf"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "public",
+            "description": "public"
+        }
+    ]
+}
