@@ -1,0 +1,56 @@
+services:
+  # Serviço para o PHP-FPM
+ # Serviço para o Nginx
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/fastcgi-php.conf:/etc/nginx/snippets/fastcgi-php.conf      
+    depends_on:
+      - php
+      - database
+    networks:
+      - app-network
+
+  php:
+    container_name: php-fpm
+    image: php:8.1-fpm
+    volumes:
+    #  - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php:/var/www/html
+    networks:
+      - app-network
+    depends_on:
+      - database
+
+    #command: bash -c "php artisan migrate && php-fpm"
+    #command: bash -c "composer clear-cache composer install --no-dev --optimize-autoloader && php-fpm" #Comando só para nao ter que subir na pasta vendor no github
+    #command: bash -c "while ! mysqladmin ping -h mysql --silent; do echo 'waiting for mysql'; sleep 2; done && php-fpm"
+
+
+  # Serviço para o MySQL
+  database:
+    container_name: database
+    image: mysql:8.0
+    ports:
+      - "3307:3306"  # Mapear porta 3307 da máquina host para a porta 3306 do container
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+
+ 
+volumes:
+  db_data: ~
+networks:
+  app-network:
+    driver: bridge
+    
