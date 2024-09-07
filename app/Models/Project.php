@@ -30,7 +30,8 @@ class Project extends Model
 
      public function equipaments()
     {
-        return $this->belongsToMany('App\Models\Equipament', 'project_x_equipament', 'project_id', 'equipament_id');
+        return $this->belongsToMany('App\Models\Equipament', 'project_x_equipament', 'project_id', 'equipament_id')
+        ->withPivot('quantity');
     }
 
 }
