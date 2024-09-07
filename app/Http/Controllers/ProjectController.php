@@ -35,7 +35,14 @@ class ProjectController extends Controller
     /*Essa foi um tipo de construção Where que fiz há um tempo, o ideal e fazer os joins, e de acordo com o que passado nos parametros, a função construi a consulta sozinha, como não é especificado os filtros, deixei somente acesso a tabela base do Project, caso quisesse filtrar por equipamento também funcionaria, porém teria que fazer o join.*/
     public function list(Request $request)
     {
-        $projetos = Project::select(['*']);
+        $projetos = Project::select(['project.*',
+            'type_installation.name as type_installation_name',
+            'client.name as client_name',
+            'uf.uf as uf_name'])
+            ->join('uf', 'project.uf_id', '=', 'uf.id')
+            ->join('client', 'project.client_id', '=', 'client.id')
+            ->join('type_installation', 'project.type_installation_id', '=', 'type_installation.id')
+        ;
         $projetos = Utils::buildWhere($projetos,$request);
         $projetos = $projetos->paginate(10);
         return Answer::json($projetos, 'Project listed successfully');
