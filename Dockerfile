@@ -1,36 +1,35 @@
-#FROM php:8.1-fpm as php
+FROM php:8.0-fpm
 
 # Instalar dependências e extensões necessárias
-#RUN apt-get update && apt-get install -y \
-#    libpng-dev \
-#    libjpeg-dev \
-#    libfreetype6-dev \
-#    libzip-dev \
-#    unzip \
-#    git \
-#    && docker-php-ext-configure gd \
-#    --with-freetype \
-#    --with-jpeg \
-#    && docker-php-ext-install gd \
-#    && docker-php-ext-install zip
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    unzip \
+    git \
+    && docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install zip
 
 # Instalar Composer
-#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Definir o diretório de trabalho
-#WORKDIR /var/www/
+WORKDIR /var/www/html
 
 # Copiar o código-fonte da aplicação para o container
-#COPY . .
+COPY . .
 
-#EXPOSE 9000
-
-#CMD ["php"]
 # Instalar dependências do Composer
-#RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader
 
-## Expor a porta 9000
+# Expor a porta 9000
+EXPOSE 9000
+
+CMD ["php-fpm"]
 
 
 
