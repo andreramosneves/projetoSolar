@@ -30,7 +30,8 @@ services:
     depends_on:
       - database
     command: >
-      sh -c "php artisan migrate --force && php artisan config:clear && php artisan optimize:clear && php-fpm"      
+      sh -c "composer install && php artisan migrate --force && php artisan config:clear && php artisan optimize:clear && php-fpm"      
+#      sh -c "php artisan migrate --force && php artisan config:clear && php artisan optimize:clear && php-fpm"      
   # Serviço para o MySQL
   database:
     container_name: database
