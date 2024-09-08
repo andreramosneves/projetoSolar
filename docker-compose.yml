@@ -29,7 +29,8 @@ services:
       - app-network
     depends_on:
       - database
-
+    command: >
+      sh -c "php artisan migrate --force && php-fpm"      
     #command: bash -c "php artisan migrate && php-fpm"
     #command: bash -c "composer clear-cache composer install --no-dev --optimize-autoloader && php-fpm" #Comando só para nao ter que subir na pasta vendor no github
     #command: bash -c "while ! mysqladmin ping -h mysql --silent; do echo 'waiting for mysql'; sleep 2; done && php-fpm"
