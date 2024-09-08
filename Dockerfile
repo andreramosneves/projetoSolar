@@ -1,4 +1,5 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
+
 
 # Instalar dependências e extensões necessárias
 RUN apt-get update && apt-get install -y \
@@ -14,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip
 
+RUN docker-php-ext-install pdo_mysql
+
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -22,6 +25,12 @@ WORKDIR /var/www/html
 
 # Copiar o código-fonte da aplicação para o container
 COPY . .
+
+RUN chown -R root:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+#chown -R root:www-data storage 
+#chmod -R 777 storage
 
 # Instalar dependências do Composer
 RUN composer install --no-dev --optimize-autoloader

@@ -18,6 +18,9 @@ services:
 
   php:
     container_name: php-fpm
+    build:
+      context: .  # Diretório onde o Dockerfile está localizado (raiz do projeto)
+      dockerfile: Dockerfile  # Nome do Dockerfile (você pode mudar se estiver usando um nome diferente)
     image: php:8.1-fpm
     volumes:
     #  - ./docker/php/php.ini:/usr/local/etc/php/php.ini
@@ -45,8 +48,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-
-
+    networks:
+      - app-network
  
 volumes:
   db_data: ~
