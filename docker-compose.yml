@@ -23,19 +23,13 @@ services:
       dockerfile: Dockerfile  # Nome do Dockerfile (você pode mudar se estiver usando um nome diferente)
     image: php:8.1-fpm
     volumes:
-    #  - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./:/var/www/html
     networks:
       - app-network
     depends_on:
       - database
-    command: >
-      sh -c "php artisan migrate --force && php-fpm"      
-    #command: bash -c "php artisan migrate && php-fpm"
-    #command: bash -c "composer clear-cache composer install --no-dev --optimize-autoloader && php-fpm" #Comando só para nao ter que subir na pasta vendor no github
-    #command: bash -c "while ! mysqladmin ping -h mysql --silent; do echo 'waiting for mysql'; sleep 2; done && php-fpm"
-
-
+    #command: >sh -c "php artisan migrate --force && php artisan config:clear && php artisan optimize:clear && php-fpm"      
   # Serviço para o MySQL
   database:
     container_name: database
