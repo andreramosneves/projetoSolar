@@ -17,6 +17,7 @@ class Kernel extends HttpKernel
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\EnsureJsonResponse::class, //JSON Only
         \App\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\Cors::class, //add Cors
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
